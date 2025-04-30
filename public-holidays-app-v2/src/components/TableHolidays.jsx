@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import TableRow from './TableRow';
 import { getHolidays } from '../api';
 
-const TableHolidays = ({ selectedCode }) => {
+const TableHolidays = ({ selectedCode, selectedYear }) => {
 	const [holidays, setHolidays] = useState([]);
 
 	useEffect(() => {
-		getHolidays(selectedCode).then((res) => setHolidays(res));
-	}, [selectedCode]);
+		getHolidays(selectedCode, selectedYear).then((res) => setHolidays(res));
+	}, [selectedCode, selectedYear]);
 
 	return (
 		<table className='border-collapse'>

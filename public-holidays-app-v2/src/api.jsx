@@ -8,12 +8,12 @@ export const getCountries = async () => {
 	return responses.data;
 };
 
-export const getHolidays = async (code) => {
+export const getHolidays = async (code, year) => {
 	const countryCode = code || DEFAULT_CODE;
 	const responses = await axios.get(
 		`${
 			import.meta.env.VITE_URL_BASE
-		}countryIsoCode=${countryCode}&validFrom=2023-01-01&validTo=2023-12-31&languageIsoCode=EN`,
+		}countryIsoCode=${countryCode}&validFrom=${year}-01-01&validTo=${year}-12-31&languageIsoCode=EN`,
 	);
 	console.info(responses.data);
 	return responses.data;
