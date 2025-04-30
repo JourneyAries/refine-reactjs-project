@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TableRow from './TableRow';
+import { getHolidays } from '../api';
 
-const TableHolidays = () => {
+const TableHolidays = ({ selectedCode }) => {
+	const [holidays, setHolidays] = useState([]);
+
+	useEffect(() => {
+		getHolidays(selectedCode).then((res) => setHolidays(res));
+	}, [selectedCode]);
+
 	return (
 		<table className='border-collapse'>
 			{/* header */}
@@ -12,7 +19,9 @@ const TableHolidays = () => {
 				</tr>
 			</thead>
 			<tbody className='[&>tr]:odd:bg-slate-100'>
-				<TableRow />
+				{holidays.map((holiday, index) => (
+					<TableRow key={index} holiday={holiday} />
+				))}
 			</tbody>
 		</table>
 	);

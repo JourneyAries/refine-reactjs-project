@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { PiCaretDown } from 'react-icons/pi';
 import { TbWorldCheck } from 'react-icons/tb';
-import { getCountries} from '../api';
+import { getCountries } from '../api';
 
-const SelectCountry = () => {
+const SelectCountry = ({ selectedCode, setSelectedCode }) => {
 	const [countries, setCountries] = useState([]);
-	const [selectedCode, setSelectedCode] = useState('');
 
 	useEffect(() => {
 		getCountries().then((res) => setCountries(res));
