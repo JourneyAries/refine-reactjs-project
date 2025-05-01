@@ -14,7 +14,7 @@ const AccordionRow = ({
 }) => {
 	return (
 		<div
-			className={`border-b border-slate-200 [&>*]:select-none hover:opacity-100 ${
+			className={`border-b border-slate-200 transition duration-300 [&>*]:select-none hover:opacity-100 ${
 				isParentOpen ? '' : 'opacity-60'
 			}`}>
 			<div

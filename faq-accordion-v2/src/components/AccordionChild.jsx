@@ -10,7 +10,7 @@ const AccordionChild = ({
 }) => {
 	return (
 		<div
-			className={`border-b border-slate-200 [&>*]:select-none hover:opacity-100 ${
+			className={`border-b border-slate-200 [&>*]:select-none transition duration-300 hover:opacity-100 ${
 				isChildOpen ? '' : 'opacity-60'
 			}`}>
 			<div
