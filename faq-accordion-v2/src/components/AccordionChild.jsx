@@ -9,13 +9,20 @@ const AccordionChild = ({
 	answer,
 }) => {
 	return (
-		<div className='border-b border-slate-200 [&>*]:select-none'>
+		<div
+			className={`border-b border-slate-200 [&>*]:select-none hover:opacity-100 ${
+				isChildOpen ? '' : 'opacity-60'
+			}`}>
 			<div
 				onClick={() => toggleChild(childIndex)}
 				className='cursor-pointer p-2 flex gap-x-2'>
 				{/* icon caret */}
 				<div className='h-6 flex items-center'>
-					<BiCaretRight />
+					<BiCaretRight
+						className={`transition duration-300 ease-in-out ${
+							isChildOpen ? 'rotate-90' : 'rotate-0'
+						}`}
+					/>
 				</div>
 				<h1 className='text-slate-900 font-bold'>{question}</h1>
 			</div>
