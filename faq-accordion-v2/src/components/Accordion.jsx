@@ -3,10 +3,23 @@ import AccordionRow from './AccordionRow';
 import { reactFAQ } from '../data/data';
 
 const Accordion = () => {
-	const [openIndex, setOpenIndex] = useState(null);
+	const [openIndex, setOpenIndex] = useState({
+		parent: null,
+		child: null,
+	});
 
-	const handleToggle = (index) => {
-		setOpenIndex(openIndex === index ? null : index);
+	const toggleParent = (index) => {
+		setOpenIndex((prev) => ({
+			parent: prev.parent === index ? null : index,
+			child: null,
+		}));
+	};
+
+	const toggleChild = (childIndex) => {
+		setOpenIndex((prev) => ({
+			...prev,
+			child: prev.child === childIndex ? null : childIndex,
+		}));
 	};
 
 	return (
@@ -14,11 +27,14 @@ const Accordion = () => {
 			{reactFAQ.map((item, index) => (
 				<AccordionRow
 					key={index}
+					item={item}
 					question={item.question}
 					answer={item.answer}
 					index={index}
-					isOpen={openIndex === index}
-					handleToggle={handleToggle}
+					isParentOpen={openIndex.parent === index}
+					isChildOpen={openIndex.parent === index ? openIndex.child : null}
+					toggleParent={toggleParent}
+					toggleChild={toggleChild}
 				/>
 			))}
 		</div>
