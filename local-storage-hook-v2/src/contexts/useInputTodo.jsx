@@ -1,10 +1,17 @@
-import React, { createContext, useMemo, useContext, useState } from 'react';
+import React, {
+	createContext,
+	useMemo,
+	useContext,
+	useState,
+	useEffect,
+} from 'react';
+import { useLocalStorage } from './hook/useLocalStorage';
 
 const InputTodoContext = createContext();
 
 export const InputTodoProvider = ({ children }) => {
 	const [inputTodo, setInputTodo] = useState('');
-	const [todoData, setTodoData] = useState([]);
+	const [todoData, setTodoData] = useLocalStorage('todoData', []);
 
 	const handleChange = (e) => {
 		const inputValue = e.target.value;
@@ -29,8 +36,8 @@ export const InputTodoProvider = ({ children }) => {
 	// ! CRUD
 	// update
 	const toggleComplete = (id) => {
-		setTodoData(
-			todoData.map((item) =>
+		setTodoData((prevData) =>
+			prevData.map((item) =>
 				item.id === id ? { ...item, checked: !item.checked } : item,
 			),
 		);
@@ -38,7 +45,7 @@ export const InputTodoProvider = ({ children }) => {
 
 	// delete
 	const toggleDelete = (id) => {
-		setTodoData(todoData.filter((item) => item.id !== id));
+		setTodoData((prevData) => prevData.filter((item) => item.id !== id));
 	};
 
 	const value = useMemo(
@@ -53,6 +60,9 @@ export const InputTodoProvider = ({ children }) => {
 		}),
 		[inputTodo, todoData],
 	);
+
+	// ! useEffect
+	useEffect(() => {}, []);
 
 	return (
 		<InputTodoContext.Provider value={value}>
