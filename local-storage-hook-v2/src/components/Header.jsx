@@ -1,6 +1,8 @@
 import React from 'react';
+import { useInputTodo } from '../contexts/useInputTodo';
 
 const Header = () => {
+	const { todoData } = useInputTodo();
 	return (
 		<div className='flex justify-between'>
 			{/* title */}
@@ -10,7 +12,7 @@ const Header = () => {
 
 			{/* counter */}
 			<div className='rounded-sm border border-slate-200 px-3 py-2 text-xs '>
-				<span className='font-bold text-slate-600'>2 </span>
+				<span className='font-bold text-slate-600'>{`${todoData.length} `}</span>
 				<span className='italic text-slate-400'>remaining</span>
 			</div>
 		</div>
